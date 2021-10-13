@@ -14,7 +14,7 @@ class LocalizationService
 
         $locale = request()->segment(1);
 
-        if (in_array($locale, config('localization.supported_locales'))) {
+        if (in_array($locale, $this->localeCodes())) {
             return $locale;
         }
     }
@@ -41,7 +41,7 @@ class LocalizationService
 
     public function supportedLocales($withoutCurrent = false)
     {
-        $locales = config('localization.supported_locales');
+        $locales = $this->localeCodes();
 
         if ($withoutCurrent === false) {
             return $locales;
@@ -50,5 +50,10 @@ class LocalizationService
         return array_filter($locales, function ($locale) {
             return $locale !== app()->getLocale();
         });
+    }
+
+    public function localeCodes(): array
+    {
+        return array_keys(config('localization.supported_locales'));
     }
 }
