@@ -18,7 +18,7 @@ class LocaleRedirection
     public function handle(Request $request, Closure $next)
     {
         $locale = $request->segment(1);
-        $supportedLocales = config('app.supported_locales');
+        $supportedLocales = config('localization.supported_locales');
 
         if (!in_array($locale, $supportedLocales)) {
             abort(redirect()->to(
