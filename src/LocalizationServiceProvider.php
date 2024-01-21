@@ -16,9 +16,7 @@ class LocalizationServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/localization.php', 'localization');
 
-        $this->app->singleton(LocalizationService::class, function () {
-            return new LocalizationService;
-        });
+        $this->app->singleton(LocalizationService::class);
     }
 
     /**
